@@ -1,60 +1,45 @@
-const circleApiKey = 'xiaP9TbNZpzx5YKTLyW6bvpQjTPNQioS'
-const email = 'haseebfarooq200@gmail.com';
 const baseURL = 'http://173.212.216.200'
 const PORT = 8000
 
 // -------------- GET APIs ---------------- //
 
 export const get_recent_posts_from_circle = async () => {
-    const accessToken = await login_circle();
-    const response = await fetch(`https://app.circle.so/api/headless/v1/home`, {
+    const response = await fetch(`${baseURL}:${PORT}/api/get_posts_from_circle`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${accessToken}`,
         },
     });
     const data = await response.json();
-    return data.records
+    console.log("data",data)
+    return data
 }
 
-export const get_all_posts_from_circle = async () => {
-    const accessToken = await login_circle();
-    const response = await fetch(`/api/headless/v1/home?per_page=1000`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${accessToken}`,
-        },
-    });
-    const data = await response.json();
-    return data.records
-}
 
 export const get_total_posts_uploaded_to_circle = async () => {
     let page = 1;
     let totalCount = 0;
     let hasNextPage = true;
 
-    const accessToken = await login_circle();
     while (hasNextPage) {
-        const response = await fetch(`/api/headless/v1/home?per_page=1000`, {
+        const response = await fetch(`${baseURL}:${PORT}/api/get_totalcount_posts_from_circle`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${accessToken}`,
             },
         });
         const data = await response.json();
 
         // Count how many posts are returned on this page
-        totalCount += data.count || 0;
+        totalCount += data || 0;
 
         hasNextPage = data.has_next_page;
         page += 1;
     }
+    console.log("totalCount",totalCount)
     return totalCount;
 }
+
 
 export const get_total_posts_fetched = async () => {
     const response = await fetch(`${baseURL}:${PORT}/api/total_posts_from_subreddit`, {
@@ -125,19 +110,6 @@ export const get_recent_logs = async ()=>{
 
 // -------------- POST APIs ---------------- //
 
-export const login_circle = async () => {
-    const response = await fetch(`https://app.circle.so/api/v1/headless/auth_token`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${circleApiKey}`,
-            'email': email
-        },
-        body: JSON.stringify({ email })
-    });
-    const data = await response.json();
-    return data.access_token;
-}
 
 export const add_subreddit = async (subreddit_name_list) => { 
         const response = await fetch(`${baseURL}:${PORT}/api/add_subreddit`, {

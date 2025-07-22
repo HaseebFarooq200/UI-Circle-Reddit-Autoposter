@@ -72,9 +72,6 @@ return (
                 >
                 <Power size={40} className='text-white' />
             </div>
-            <span>
-                ON
-            </span>
             </>
         ) : (
             // POWER OFF
@@ -93,9 +90,6 @@ return (
                 >
                 <Power size={40} className='text-white' />
                 </div>
-                <span>
-                    OFF
-                </span>
             </>
         )}
         </div>
