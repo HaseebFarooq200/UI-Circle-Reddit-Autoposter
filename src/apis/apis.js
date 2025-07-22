@@ -1,7 +1,7 @@
-const circleApiKey = process.env.React_App_Circle_API_Key;
-const email = process.env.React_App_Email;
-const baseURL = process.env.React_App_Base_URL
-const PORT = process.env.React_App_Port
+const circleApiKey = 'xiaP9TbNZpzx5YKTLyW6bvpQjTPNQioS'
+const email = 'haseebfarooq200@gmail.com';
+const baseURL = 'http://173.212.216.200'
+const PORT = 8000
 
 // -------------- GET APIs ---------------- //
 
