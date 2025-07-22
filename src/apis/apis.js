@@ -1,6 +1,6 @@
 const circleApiKey = 'xiaP9TbNZpzx5YKTLyW6bvpQjTPNQioS'
 const email = 'haseebfarooq200@gmail.com';
-const baseURL = 'https://173.212.216.200'
+const baseURL = 'http://173.212.216.200'
 const PORT = 8000
 
 // -------------- GET APIs ---------------- //
