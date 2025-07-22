@@ -7,7 +7,7 @@ const PORT = 8000
 
 export const get_recent_posts_from_circle = async () => {
     const accessToken = await login_circle();
-    const response = await fetch(`https://app.circle.so/api/headless/v1/home`, {
+    const response = await fetch(`/api/headless/v1/home`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -126,7 +126,7 @@ export const get_recent_logs = async ()=>{
 // -------------- POST APIs ---------------- //
 
 export const login_circle = async () => {
-    const response = await fetch(`https://app.circle.so/api/v1/headless/auth_token`, {
+    const response = await fetch(`/api/v1/headless/auth_token`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
