@@ -101,13 +101,13 @@ const Dashboard = () => {
         <>
             <Header page_title="Dashboard" />
             <div className='bg-gray-100'>
-                <div className='flex m-5 space-x-3 '>
+                <div className='flex flex-col md:flex-row m-5 gap-3 '>
                     <DataCards title="Total Subreddits" total={total_subreddits} />
                     <DataCards title="Posts Fetched" total={totalPostsFetched} />
                     <DataCards title="Posts Uploaded To Circle" total={totalPostsUploadedToCircle} />
                 </div>
-                <div className='flex m-5 mx-5 space-x-3 '>
-                    <div className=' w-full text-sm'>
+                <div className='flex flex-col lg:flex-row gap-3 m-5'>
+                    <div className='w-full text-sm'>
                         <DataTable
                             title="Recent Posts Activity"
                             columns={recent_post_acivity_columns}
@@ -115,7 +115,7 @@ const Dashboard = () => {
                             handleForceReload={handleForceReload}
                         />
                     </div>
-                    <div className='w-1/2 p-3 h-[390px] overflow-y-auto bg-[#fbfeff] border border-gray-200 rounded-md'>
+                    <div className='w-full lg:w-1/2 p-3 h-[390px] overflow-y-auto bg-[#fbfeff] border border-gray-200 rounded-md'>
                         <RecentAutomationLogs recentLogs={recentLogs} />
                     </div>
                 </div>

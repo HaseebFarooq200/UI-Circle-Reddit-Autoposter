@@ -1,16 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Power } from 'lucide-react';
 import Header from '../components/header';
-import { run_script } from '../apis/apis';
+import { get_settings, run_script } from '../apis/apis';
 import { Toast } from 'primereact/toast';
 
 
 const Settings = () => {
-    const getInitialPower = () => {
-        const storedPower = localStorage.getItem('power');
-        return storedPower === 'true'; 
-    };
-    const [power, setPower] = useState(getInitialPower);
+    const [power, setPower] = useState();
 
     const toast = useRef(null);
 
@@ -18,36 +14,20 @@ const Settings = () => {
         toast.current.show({severity:'success', summary: 'Success', detail:'Script Activated Successfully', life: 3000});
     }
     const showSuccessOFF = () => {
-        toast.current.show({severity:'success', summary: 'Success', detail:'Script Deactivated Successfully', life: 3000});
+        toast.current.show({severity:'error', summary: 'Success', detail:'Script Deactivated Successfully', life: 3000});
     }
 
 
-    // const successForOn = () => {
-    //     const modal = Modal.success({
-    //         content: 'Script Activated Successfully',
-    //         okButtonProps: { style: { display: 'none' } },
-    //     });
-
-    //     setTimeout(() => {
-    //         modal.destroy();
-    //     }, 3000)
-    // };
-
-    // const successForOFF = () => {
-    //     const modal = Modal.success({
-    //         content: 'Script Deactivated Successfully',
-    //         okButtonProps: { style: { display: 'none' } },
-    //     });
-
-    //     setTimeout(() => {
-    //         modal.destroy();
-    //     }, 3000)
-    // };
-
-
     useEffect(() => {
-    localStorage.setItem('power', power);
-    }, [power]);
+        get_settings().then(settings => {
+            if (settings[0].script_status==='inactive'){
+                setPower(false);
+            }
+            else{
+                setPower(true);
+            }
+        })
+    }, []);
 
 return (
 <>
@@ -61,7 +41,7 @@ return (
             <div
                 className='inline-block bg-[#00b600] p-2 cursor-pointer rounded-lg'
                 onClick={async () => {
-                    const res = await run_script('OFF')
+                    const res = await run_script('inactive')
                     if (res.status === 200) {
                         setPower(false);
                         showSuccessOFF()
@@ -79,7 +59,7 @@ return (
                 <div
                 className='inline-block bg-[#ff2121] p-2 cursor-pointer rounded-lg'
                 onClick={async () => {
-                    const res = await run_script('ON')
+                    const res = await run_script('active')
                     if (res.status === 200) {
                         setPower(true);
                         showSuccessON()

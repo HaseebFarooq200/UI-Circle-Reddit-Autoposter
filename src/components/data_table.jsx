@@ -8,8 +8,8 @@ const DataTable = ({title, columns, tableData, handleForceReload}) => {
             columns={columns} 
             dataSource={tableData} 
             className='h-[390px] overflow-y-auto'
-            // pagination={{ pageSize: 10 }}
             pagination={false}
+            scroll={{ x: 600 }}
             rowClassName={() => 'text-sm'}
             title={() => 
             <div className='flex justify-between items-center'>

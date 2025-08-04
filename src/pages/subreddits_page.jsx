@@ -124,7 +124,7 @@ const SubredditsPage = () => {
         <>
             <Header page_title="Subreddits Management" />
             <div className='bg-gray-100'>
-                <div className='flex m-5 space-x-3 '>
+                <div className='flex flex-col sm:flex-row m-5 gap-3 '>
                     <DataCards title="Total Subreddits" total={total_subreddits} />
                     <DataCards title="Total Posts Fetched from Subreddits" total={totalPostsFetched} />
                 </div>
@@ -137,7 +137,7 @@ const SubredditsPage = () => {
                         />
                     </div>
 
-                    <div className='flex w-full my-5 space-x-3'>
+                    <div className='flex flex-col lg:flex-row w-full my-5 gap-3'>
                         <SubredditsFilter  />
                         <SubredditsValidation />
                         <AddSubreddits
